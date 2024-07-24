@@ -53,18 +53,17 @@ export default function AddSheet() {
   }
 
   return (
-    <div className="flex flex-col gap-2">
-      <Button variant={"outline"}>
-        <Link href="/" className="flex gap-2 items-center">
-          <ArrowLeftIcon />
+    <div className="flex flex-col gap-2 h-full mx-auto max-w-[30rem]">
+      <Link href="/" className="flex gap-2 items-center">
+        <Button variant={"outline"} className="w-full">
+          <ArrowLeftIcon className="mr-2" />
           Voltar
-        </Link>
-      </Button>
+        </Button>
+      </Link>
 
       <p className="font-bold antialiased mt-4">Adicionar partitura</p>
 
       <Separator />
-
       <Form {...form}>
         <form
           onSubmit={(e) => {

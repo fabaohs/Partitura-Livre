@@ -18,11 +18,11 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="pt_BR">
-      <body
-        className={`${inter.className} dark flex min-h-screen flex-col items-center justify-between p-24`}
-      >
-        <ReactQueryProvider>{children}</ReactQueryProvider>
-      </body>
+      <ReactQueryProvider>
+        <body className={`${inter.className} dark min-h-screen p-24`}>
+          {children}
+        </body>
+      </ReactQueryProvider>
     </html>
   );
 }
