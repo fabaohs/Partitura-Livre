@@ -8,6 +8,9 @@ export default function Home() {
       <Button variant="outline">
         <Link href="/AddSheet">Adicionar partitura</Link>
       </Button>
+      <div>
+        <p>Lista das partituras</p>
+      </div>
     </main>
   );
 }
