@@ -10,6 +10,9 @@ export default function Home() {
       <Link href="/AddSheet">
         <Button variant="outline">Adicionar partitura</Button>
       </Link>
+      <div>
+        <p className="text-accent-foreground">Lista das partituras aqui...</p>
+      </div>
     </main>
   );
 }
