@@ -11,6 +11,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Separator } from "@/components/ui/separator";
 import { useMutation } from "@tanstack/react-query";
+import { request, gql } from "graphql-request";
 
 const schema = z.object({
   title: z
@@ -23,17 +24,18 @@ const schema = z.object({
 
 type Sheet = z.infer<typeof schema>;
 
-async function addSheet(data: Sheet) {
+function addSheet(data: Sheet) {
   const baseUrl = process.env.NEXT_PUBLIC_API_URL;
   const url = `${baseUrl}/sheets/addSheet`;
 
-  const response = await fetch(url, {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify(data),
-  }).then((res) => res.json());
+  const mutation = gql`
+    addSheet(dto: { title: "${data.title}", author: "${data.author}" }) {
+      author
+      title
+    }
+  `;
+
+  const response = request(url, mutation);
 
   return response;
 }

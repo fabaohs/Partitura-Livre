@@ -17,7 +17,6 @@ namespace backend.Contexts
 
         public AddSheetDto AddSheet([Service] AppDbContext dbContext, AddSheetDto dto)
         {
-
             _logger.LogInformation("Adding sheet with title {Title} and author {Author}", dto.Title, dto.Author);
 
             var sheet = new Models.Sheet
