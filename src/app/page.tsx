@@ -17,6 +17,7 @@ async function getSheets() {
       }
     }
   `;
+
   const response: { sheets: Array<{ author: string; title: string }> } =
     await request(url, mutation);
 
@@ -33,7 +34,7 @@ export default function Home() {
   });
 
   return (
-    <main className="flex flex-col items-center gap-2">
+    <main className="flex flex-col items-center gap-4">
       <h1 className="text-4xl font-black antialiased text-center">
         Partitura Livre
       </h1>

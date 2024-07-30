@@ -12,6 +12,7 @@ import { Label } from "@/components/ui/label";
 import { Separator } from "@/components/ui/separator";
 import { useMutation } from "@tanstack/react-query";
 import { request, gql } from "graphql-request";
+import { useRouter } from "next/navigation";
 
 const schema = z.object({
   title: z
@@ -26,13 +27,15 @@ type Sheet = z.infer<typeof schema>;
 
 function addSheet(data: Sheet) {
   const baseUrl = process.env.NEXT_PUBLIC_API_URL;
-  const url = `${baseUrl}/sheets/addSheet`;
+  const url = `${baseUrl}/graphql`;
 
   const mutation = gql`
+  mutation{
     addSheet(dto: { title: "${data.title}", author: "${data.author}" }) {
       author
       title
     }
+  }
   `;
 
   const response = request(url, mutation);
@@ -41,6 +44,8 @@ function addSheet(data: Sheet) {
 }
 
 export default function AddSheet() {
+  const { back } = useRouter();
+
   const { mutateAsync, isPending } = useMutation({
     mutationKey: ["addSheet"],
     mutationFn: addSheet,
@@ -52,6 +57,7 @@ export default function AddSheet() {
 
   async function handleSubmit(data: Sheet) {
     await mutateAsync(data);
+    back();
   }
 
   return (
@@ -79,7 +85,7 @@ export default function AddSheet() {
             control={form.control}
             render={({ field }) => (
               <FormItem>
-                <Label htmlFor="title">Título</Label>
+                <Label htmlFor="title">Title</Label>
                 <Input {...field} id="title" placeholder="Nocturne n1..." />
                 <FormMessage className="font-bold" />
               </FormItem>
