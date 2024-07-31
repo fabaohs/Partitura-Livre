@@ -1,9 +1,22 @@
 "use client";
 
 import { Button } from "@/components/ui/button";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
 import { useQuery } from "@tanstack/react-query";
 import { gql, request } from "graphql-request";
 import Link from "next/link";
+
+type Sheet = {
+  author: string;
+  title: string;
+  id: string; // UUID
+};
 
 async function getSheets() {
   const baseUrl = process.env.NEXT_PUBLIC_API_URL;
@@ -14,12 +27,12 @@ async function getSheets() {
       sheets {
         author
         title
+        id
       }
     }
   `;
 
-  const response: { sheets: Array<{ author: string; title: string }> } =
-    await request(url, mutation);
+  const response: { sheets: Array<Sheet> } = await request(url, mutation);
 
   console.log("response");
   console.log(response.sheets);
@@ -41,15 +54,22 @@ export default function Home() {
       <Link href="/AddSheet">
         <Button variant="outline">Adicionar partitura</Button>
       </Link>
-      <div>
+      <div className="flex gap-4">
         {isLoading && <p>Carregando...</p>}
         {data &&
           data.length > 0 &&
           data?.map((sheet) => (
-            <div key={sheet.title} className="flex flex-col gap-2">
-              <p>Title: {sheet.title}</p>
-              <p>Author: {sheet.author}</p>
-            </div>
+            <Card key={sheet.id}>
+              <CardHeader>
+                <CardTitle>{sheet.title}</CardTitle>
+                <CardDescription>{sheet.author}</CardDescription>
+              </CardHeader>
+              <CardContent>
+                <Link href={`/Sheet/${sheet.id}`}>
+                  <Button variant="outline">Visualizar</Button>
+                </Link>
+              </CardContent>
+            </Card>
           ))}
       </div>
     </main>
