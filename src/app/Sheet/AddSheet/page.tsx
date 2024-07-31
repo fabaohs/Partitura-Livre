@@ -85,7 +85,7 @@ export default function AddSheet() {
             control={form.control}
             render={({ field }) => (
               <FormItem>
-                <Label htmlFor="title">Title</Label>
+                <Label htmlFor="title">Título</Label>
                 <Input {...field} id="title" placeholder="Nocturne n1..." />
                 <FormMessage className="font-bold" />
               </FormItem>

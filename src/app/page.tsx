@@ -1,77 +1,98 @@
-"use client";
+﻿"use client";
 
 import { Button } from "@/components/ui/button";
 import {
   Card,
   CardContent,
   CardDescription,
+  CardFooter,
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import { useQuery } from "@tanstack/react-query";
-import { gql, request } from "graphql-request";
-import Link from "next/link";
+import { Form, FormField, FormItem, FormMessage } from "@/components/ui/form";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import { Separator } from "@/components/ui/separator";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { useForm } from "react-hook-form";
+import { z } from "zod";
 
-type Sheet = {
-  author: string;
-  title: string;
-  id: string; // UUID
-};
+const schema = z.object({
+  email: z
+    .string({ required_error: "Preencha o email" })
+    .email({ message: "Email inválido" }),
+  password: z
+    .string({ required_error: "Digite sua senha" })
+    .min(6, { message: "A senha deve ter no mínimo 6 caracteres" }),
+});
 
-async function getSheets() {
-  const baseUrl = process.env.NEXT_PUBLIC_API_URL;
-  const url = `${baseUrl}/graphql/`;
+type Login = z.infer<typeof schema>;
 
-  const mutation = gql`
-    query {
-      sheets {
-        author
-        title
-        id
-      }
-    }
-  `;
-
-  const response: { sheets: Array<Sheet> } = await request(url, mutation);
-
-  console.log("response");
-  console.log(response.sheets);
-
-  return response.sheets;
-}
-
-export default function Home() {
-  const { isLoading, data } = useQuery({
-    queryKey: ["getSheets"],
-    queryFn: () => getSheets(),
+export default function LoginPage() {
+  const form = useForm<Login>({
+    resolver: zodResolver(schema),
   });
 
+  const { handleSubmit, control } = form;
+
+  async function submit(data: Login) {
+    console.log("Submiting");
+    console.log(data);
+  }
+
   return (
-    <main className="flex flex-col items-center gap-4">
-      <h1 className="text-4xl font-black antialiased text-center">
-        Partitura Livre
-      </h1>
-      <Link href="/AddSheet">
-        <Button variant="outline">Adicionar partitura</Button>
-      </Link>
-      <div className="flex gap-4">
-        {isLoading && <p>Carregando...</p>}
-        {data &&
-          data.length > 0 &&
-          data?.map((sheet) => (
-            <Card key={sheet.id}>
-              <CardHeader>
-                <CardTitle>{sheet.title}</CardTitle>
-                <CardDescription>{sheet.author}</CardDescription>
-              </CardHeader>
-              <CardContent>
-                <Link href={`/Sheet/${sheet.id}`}>
-                  <Button variant="outline">Visualizar</Button>
-                </Link>
-              </CardContent>
-            </Card>
-          ))}
-      </div>
-    </main>
+    <div className="w-full">
+      <Card className="max-w-[40rem] mx-auto">
+        <CardHeader>
+          <CardTitle className="font-black text-2xl">Partitura Livre</CardTitle>
+          <CardDescription>Entre com sua conta</CardDescription>
+        </CardHeader>
+        <Separator className="mb-4" />
+        <CardContent>
+          <Form {...form}>
+            <form
+              onSubmit={(e) => {
+                e.preventDefault();
+                handleSubmit(submit)();
+              }}
+              className="space-y-4"
+            >
+              <FormField
+                control={control}
+                name="email"
+                render={({ field }) => (
+                  <FormItem>
+                    <Label htmlFor="email">Email</Label>
+                    <Input
+                      {...field}
+                      id="email"
+                      placeholder="email@email.com"
+                    />
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+              <FormField
+                control={control}
+                name="password"
+                render={({ field }) => (
+                  <FormItem>
+                    <Label htmlFor="password">Senha</Label>
+                    <Input
+                      {...field}
+                      id="password"
+                      placeholder="Digite sua senha"
+                    />
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+
+              <Button>Entrar</Button>
+            </form>
+          </Form>
+        </CardContent>
+      </Card>
+    </div>
   );
 }
