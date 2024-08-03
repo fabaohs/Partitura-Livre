@@ -3,8 +3,8 @@ import GoogleProvider from "next-auth/providers/google";
 
 export const authOptions: NextAuthOptions = {
   pages: {
-    signIn: "/Sheet/",
-    signOut: "/",
+    signIn: "/auth/signin",
+    signOut: "/auth/signout",
   },
   providers: [
     GoogleProvider({

@@ -4,14 +4,18 @@ import { Button } from "@/components/ui/button";
 import { Form, FormField, FormItem, FormMessage } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
+import { Separator } from "@/components/ui/separator";
+
+import { GitHubLogoIcon } from "@radix-ui/react-icons";
+import Image from "next/image";
+import * as Google from "../../../public/google.png";
+
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
-import { signIn } from "next-auth/react";
-import { Separator } from "@/components/ui/separator";
-import * as Google from "../../../public/google.png";
-import Image from "next/image";
-import { GitHubLogoIcon } from "@radix-ui/react-icons";
+
+import { signIn, useSession } from "next-auth/react";
+import { useEffect } from "react";
 
 const schema = z.object({
   email: z
@@ -26,6 +30,13 @@ type Login = z.infer<typeof schema>;
 
 // IS FOR CUSTOM LOGIN
 export default function LoginForm() {
+  const { data, status, update } = useSession();
+
+  useEffect(() => {
+    console.log("Session data", data);
+    console.log(status);
+  }, [data, status]);
+
   const form = useForm<Login>({
     resolver: zodResolver(schema),
   });

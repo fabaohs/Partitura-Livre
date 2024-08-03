@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
 import ReactQueryProvider from "@/contexts/QueryContext";
+import SessionProvider from "@/contexts/SessionContext";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -18,11 +19,13 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="pt_BR">
-      <ReactQueryProvider>
-        <body className={`${inter.className} dark min-h-screen p-24`}>
-          {children}
-        </body>
-      </ReactQueryProvider>
+      <SessionProvider>
+        <ReactQueryProvider>
+          <body className={`${inter.className} dark min-h-screen p-24`}>
+            {children}
+          </body>
+        </ReactQueryProvider>
+      </SessionProvider>
     </html>
   );
 }
