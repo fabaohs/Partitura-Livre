@@ -16,6 +16,7 @@ import { z } from "zod";
 
 import { signIn, useSession } from "next-auth/react";
 import { useEffect } from "react";
+import { useRouter } from "next/navigation";
 
 const schema = z.object({
   email: z
@@ -30,12 +31,14 @@ type Login = z.infer<typeof schema>;
 
 // IS FOR CUSTOM LOGIN
 export default function LoginForm() {
-  const { data, status, update } = useSession();
+  const { status } = useSession();
+  const { push: redirect } = useRouter();
 
   useEffect(() => {
-    console.log("Session data", data);
-    console.log(status);
-  }, [data, status]);
+    if (status === "authenticated") {
+      redirect("/Sheet");
+    }
+  }, [status]);
 
   const form = useForm<Login>({
     resolver: zodResolver(schema),
@@ -52,6 +55,10 @@ export default function LoginForm() {
     signIn("google");
   }
 
+  function handleGithubClick() {
+    signIn("github");
+  }
+
   return (
     <>
       <div className="space-y-2">
@@ -61,7 +68,7 @@ export default function LoginForm() {
             <Image src={Google} width={15} height={15} alt="google logo" />{" "}
             <p className="font-bold">Entrar com Google</p>
           </Button>
-          <Button className="space-x-2" onClick={handleGoogleClick}>
+          <Button className="space-x-2" onClick={handleGithubClick}>
             <GitHubLogoIcon />
             <p className="font-bold">Entrar com Github</p>
           </Button>
