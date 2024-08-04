@@ -1,15 +1,16 @@
 ﻿import { NextRequest, NextResponse } from "next/server";
 
-export function middleware(request: NextRequest) {
-  console.log("middleware");
+// ?TODO: IMPLEMENT THE AUTH MIDDLEWARE WITH NEXT AUTH
+// ?TODO: THIS -> export { auth as middleware } from "./auth"
 
-  // get cookies
+export function middleware(request: NextRequest) {
   const cookies = request.cookies;
 
   if (
     request.nextUrl.pathname !== "/" &&
     !cookies.has("next-auth.session-token")
   ) {
+    // ?TODO: IMPLEMENT DYNAMIC REDIRECT
     const url = `http://localhost:3000/`;
     return NextResponse.redirect(url);
   }

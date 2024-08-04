@@ -3,6 +3,9 @@ import GoogleProvider from "next-auth/providers/google";
 import GithubProvider from "next-auth/providers/github";
 
 export const authOptions: NextAuthOptions = {
+  jwt: {
+    maxAge: 60 * 60,
+  },
   providers: [
     GoogleProvider({
       clientId: process.env.NEXT_PUBLIC_GOOGLE_CLIENT_ID as string,
