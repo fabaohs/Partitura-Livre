@@ -16,6 +16,6 @@ namespace backend.Contexts
         }
 
         public DbSet<Sheet> Sheets { get; set; }
-
+        public DbSet<User> Users { get; set; }
     }
 }

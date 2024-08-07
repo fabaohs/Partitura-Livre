@@ -13,5 +13,9 @@ namespace backend.Contexts
         [UseSorting]
         public IQueryable<Sheet> GetSheets([Service] AppDbContext dbContext) => dbContext.Sheets;
 
+        [UseProjection]
+        [UseFiltering]
+        [UseSorting]
+        public IQueryable<User> GetUsers([Service] AppDbContext dbContext) => dbContext.Users;
     }
 }
