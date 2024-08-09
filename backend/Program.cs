@@ -17,6 +17,7 @@ builder.Services.AddAuthentication().AddCookie(IdentityConstants.ApplicationSche
 builder.Services.AddGraphQLServer()
     .AddQueryType<Query>()
     .AddMutationType<Mutation>()
+    .AddAuthorization()
     .AddProjections()
     .AddFiltering()
     .AddSorting();
@@ -27,6 +28,8 @@ var app = builder.Build();
 
 app.MapGraphQL("/graphql");
 app.UseCors();
+app.UseAuthentication();
+app.UseAuthorization();
 
 app.UseHttpsRedirection();
 

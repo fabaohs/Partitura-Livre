@@ -22,7 +22,7 @@ async function getSheets() {
   const baseUrl = process.env.NEXT_PUBLIC_API_URL;
   const url = `${baseUrl}/graphql/`;
 
-  const mutation = gql`
+  const query = gql`
     query {
       sheets {
         author
@@ -32,7 +32,7 @@ async function getSheets() {
     }
   `;
 
-  const response: { sheets: Array<Sheet> } = await request(url, mutation);
+  const response: { sheets: Array<Sheet> } = await request(url, query);
 
   console.log("response");
   console.log(response.sheets);

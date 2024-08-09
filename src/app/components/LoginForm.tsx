@@ -49,6 +49,13 @@ export default function LoginForm() {
   async function submit(data: Login) {
     console.log("Submiting");
     console.log(data);
+
+    // USE NEXT AUTH TO SIGN IN
+    const response = await signIn("credentials", {
+      email: data.email,
+      password: data.password,
+      redirect: false,
+    });
   }
 
   function handleGoogleClick() {
@@ -101,6 +108,7 @@ export default function LoginForm() {
               </FormItem>
             )}
           />
+
           <FormField
             control={control}
             name="password"

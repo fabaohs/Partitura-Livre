@@ -172,3 +172,4 @@ C:\Users\User\Desktop\Estudos\partitura_livre\backend\obj\Debug\net8.0\refint\ba
 C:\Users\User\Desktop\Estudos\partitura_livre\backend\obj\Debug\net8.0\backend.pdb
 C:\Users\User\Desktop\Estudos\partitura_livre\backend\obj\Debug\net8.0\backend.genruntimeconfig.cache
 C:\Users\User\Desktop\Estudos\partitura_livre\backend\obj\Debug\net8.0\ref\backend.dll
+C:\Users\User\Desktop\Estudos\partitura_livre\backend\bin\Debug\net8.0\HotChocolate.AspNetCore.Authorization.dll
