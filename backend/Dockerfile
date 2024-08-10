@@ -12,3 +12,4 @@ WORKDIR /runtime-app
 COPY --from=build-env /app/out .
 
 EXPOSE 5000:5000
+ENTRYPOINT [ "dotnet", "backend.dll" ]
