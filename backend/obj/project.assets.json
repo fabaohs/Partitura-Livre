@@ -6138,24 +6138,25 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\User\\.nuget\\packages\\": {}
+    "/Users/fabiolevel33/.nuget/packages/": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\User\\Desktop\\Estudos\\partitura_livre\\backend\\backend.csproj",
+      "projectUniqueName": "/Users/fabiolevel33/Desktop/Estudos/personal/Partitura-Livre/backend/backend.csproj",
       "projectName": "backend",
-      "projectPath": "C:\\Users\\User\\Desktop\\Estudos\\partitura_livre\\backend\\backend.csproj",
-      "packagesPath": "C:\\Users\\User\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\User\\Desktop\\Estudos\\partitura_livre\\backend\\obj\\",
+      "projectPath": "/Users/fabiolevel33/Desktop/Estudos/personal/Partitura-Livre/backend/backend.csproj",
+      "packagesPath": "/Users/fabiolevel33/.nuget/packages/",
+      "outputPath": "/Users/fabiolevel33/Desktop/Estudos/personal/Partitura-Livre/backend/obj/",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\User\\AppData\\Roaming\\NuGet\\NuGet.Config"
+        "/Users/fabiolevel33/.nuget/NuGet/NuGet.Config"
       ],
       "originalTargetFrameworks": [
         "net8.0"
       ],
       "sources": {
+        "/usr/local/share/dotnet/library-packs": {},
         "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {
@@ -6251,7 +6252,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.303/PortableRuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/8.0.204/PortableRuntimeIdentifierGraph.json"
       }
     }
   },
