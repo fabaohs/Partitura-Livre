@@ -1,4 +1,5 @@
-﻿import { Form, FormField, FormItem } from "@/components/ui/form";
+﻿"use client";
+import { Form, FormField, FormItem } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -27,7 +28,6 @@ export function CreateAccount() {
   const { handleSubmit, control } = form;
 
   async function submit(data: CreateAccount) {
-    console.log("Submiting");
     console.log(data);
   }
 

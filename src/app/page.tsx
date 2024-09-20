@@ -7,6 +7,8 @@
 } from "@/components/ui/card";
 import { Separator } from "@/components/ui/separator";
 import LoginForm from "./components/LoginForm";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { CreateAccount } from "./components/CreateAccount";
 
 export default function LoginPage() {
   return (
@@ -18,7 +20,18 @@ export default function LoginPage() {
         </CardHeader>
         <Separator className="mb-4" />
         <CardContent>
-          <LoginForm />
+          <Tabs defaultValue="login">
+            <TabsList>
+              <TabsTrigger value="login">Entrar</TabsTrigger>
+              <TabsTrigger value="create-account">Criar conta</TabsTrigger>
+            </TabsList>
+            <TabsContent value="login">
+              <LoginForm />
+            </TabsContent>
+            <TabsContent value="create-account">
+              <CreateAccount />
+            </TabsContent>
+          </Tabs>
         </CardContent>
       </Card>
     </div>
